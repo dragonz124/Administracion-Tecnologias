@@ -1,0 +1,38 @@
+import unittest
+from funciones import validar_usuario  
+
+class TestAutenticacion(unittest.TestCase):
+
+    
+    def test_usuario_y_contraseña_correctos(self):
+        resultado = validar_usuario("admin", "admin12")
+        self.assertTrue(resultado)  
+
+    
+    def test_usuario_correcto_contraseña_incorrecta(self):
+        resultado = validar_usuario("admin", "clave_incorrecta")
+        self.assertFalse(resultado)  
+
+
+    def test_usuario_incorrecto_contraseña_correcta(self):
+        resultado = validar_usuario("usuario_inexistente", "admin123")
+        self.assertFalse(resultado) 
+
+    
+    def test_usuario_y_contraseña_incorrectos(self):
+        resultado = validar_usuario("usuario_inexistente", "clave_incorrecta")
+        self.assertFalse(resultado)  
+
+    
+    def test_usuario_vacio(self):
+        resultado = validar_usuario("", "admin123")
+        self.assertFalse(resultado)  
+
+
+    def test_contraseña_vacia(self):
+        resultado = validar_usuario("admin", "")
+        self.assertFalse(resultado) 
+
+
+if __name__ == '__main__':
+    unittest.main()
